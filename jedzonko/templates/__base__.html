@@ -1,0 +1,105 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}{% endblock title %} | Zaplanuj Jedzonko</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Charmonman:400,700|Open+Sans:400,600,700&amp;subset=latin-ext"
+        rel="stylesheet">
+    <link rel="stylesheet" href="{% static "css/style.css" %}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <script src="{% static 'scripts/like_dislike.js' %}"></script>
+    <script src="{% static 'scripts/recipe_search.js' %}"></script>
+</head>
+
+<body>
+    <header class="page-header">
+        <nav class="navbar navbar-expand-lg justify-content-between">
+            <a href="/" class="navbar-brand main-logo main-logo-smaller">
+                Zaplanuj <span>Jedzonko</span>
+            </a>
+         <div class="d-flex justify-content-around">
+             <h4 class="text-light mr-3">Imię</h4>
+             <div class="circle-div text-center"><i class="fas fa-user icon-user"></i></div>
+         </div>
+        </nav>
+    </header>
+
+    <section class="dashboard-section">
+        <div class="row dashboard-nowrap">
+                <ul class="nav flex-column long-bg">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/main/">
+                                <span>Pulpit</span>
+                                <i class="fas fa-angle-right"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/recipe/list/">
+                                <span>Przepisy</span>
+                                <i class="fas fa-angle-right"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/plan/list/">
+                                <span>Plany</span>
+                                <i class="fas fa-angle-right"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/plan/add-recipe/">
+                                <span>Dodaj przepis do planu</span>
+                                <i class="fas fa-angle-right"></i>
+                            </a>
+                        </li>
+                        <!-- Menu on the side option -->
+                        <li class="nav-item like-container">
+                                <form method="post" id="like">
+                                    {% csrf_token %}
+                                    <br><hr style="margin-bottom: 0px;">
+                                    <button type="submit" name="vote" value="like" id="like-but">
+                                        lubię przepis
+                                    </button>
+                                    <hr style="margin-top: 0px; margin-bottom: 0px;">
+                                    <button id="like-but" type="submit" name="vote" value="dislike">
+                                      nie lubię przepisu
+                                    </button>
+                                    <hr style="margin-top: 0px;">
+                                </form>
+                            </li>
+                        <li class="nav-item search-container">
+                            <form method="post" id="search">
+                                {% csrf_token %}
+                                <br><hr style="margin-bottom: 0px;">
+                                <input type="text" name="find" id="search-input" placeholder="Szukaj Przepisu">
+                                <hr style="margin-top: 0px; margin-bottom: 0px;">
+                                <button id="search-but" type="submit" name="search">
+                                    Szukaj
+                                </button>
+                                <hr style="margin-top: 0px;">
+                            </form>
+                        </li>
+                    </ul>
+
+            <div class="m-4 p-3 width-medium text-color-darker">
+
+<!-- //--------------------------- page content -------------------------// -->
+{% block content %}{% endblock content %}
+<!-- //--------------------------- page content end ---------------------// -->
+
+            </div>
+        </div>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+</body>
+</html>
